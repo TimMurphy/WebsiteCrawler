@@ -9,6 +9,7 @@ thumbs.db
 # Visual Studio
 ########################
 
+_NCrunch_*/
 [Aa]rtifacts/
 [Bb]in/
 [Ll]ogs/
