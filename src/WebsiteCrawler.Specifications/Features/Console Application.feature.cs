@@ -86,13 +86,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Then("the web site is crawled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 9
- testRunner.And("the report lists all internal links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the report is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("the report lists all external links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.And("the report lists all broken links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
- testRunner.And("the report lists excluded urls", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the report lists all internal links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -103,11 +99,11 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RunConsoleApplicationWithInvalidArguments()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Run console application with invalid arguments", ((string[])(null)));
-#line 14
+#line 12
 this.ScenarioSetup(scenarioInfo);
-#line 15
+#line 13
  testRunner.When("I run the console application with invalid arguments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
+#line 14
  testRunner.Then("the application help is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

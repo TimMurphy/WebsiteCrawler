@@ -26,5 +26,8 @@
     <NamedTestSelector>
       <TestName>WebsiteCrawler.Specifications.Features.ConsoleApplicationFeature.RunConsoleApplicationWithInvalidArguments</TestName>
     </NamedTestSelector>
+    <NamedTestSelector>
+      <TestName>WebsiteCrawler.Specifications.Features.ConsoleApplicationFeature.RunConsoleApplicationWithValidArguments</TestName>
+    </NamedTestSelector>
   </IgnoredTests>
 </ProjectConfiguration>
