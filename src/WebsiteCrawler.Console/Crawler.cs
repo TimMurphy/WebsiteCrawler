@@ -53,14 +53,27 @@ namespace WebsiteCrawler.Console
             LogTo.Information("Processing {0:N0} links on '{1}'...", links.Count, _webDriver.Url);
 
             var newUrls = links.Select(n => n.GetAttribute("href")).Where(IsNewUrl).ToArray();
-            var internalUrls = newUrls.Where(IsInternalUrl).ToArray();
+            var internalUrls = newUrls.Where(IsInternalUrl).Where(u => !ExcludeUrl(u)).ToArray();
 
-            _internalUrls = new HashSet<string>(_internalUrls.Concat(internalUrls));
-
+            // ReSharper disable once LoopCanBePartlyConvertedToQuery
+            //
+            // Loop cannot be converted to query because ProcessLinks(IReadOnlyCollection<IWebElement> links) is
+            // called recursively and therefore _internalUrls may have been updated since newUrls was generated.
             foreach (var internalUrl in internalUrls)
             {
-                ReadUrl(internalUrl);
+                if (_internalUrls.Add(internalUrl))
+                {
+                    ReadUrl(internalUrl);
+                }
             }
+        }
+
+        private bool ExcludeUrl(string url)
+        {
+            // todo: temporary hack. could be cause of croquet scores loop.
+            // return url.Contains("#");
+            // future use.
+            return false;
         }
 
         private IReadOnlyCollection<IWebElement> GetLinks()
