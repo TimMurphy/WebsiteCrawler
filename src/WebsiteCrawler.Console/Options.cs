@@ -25,6 +25,9 @@ namespace WebsiteCrawler.Console
         [Option('r', "resultPath", Required = true, HelpText = "The file to write YAML result to.")]
         public string ResultPath { get; set; }
 
+        [Option('w', "waitAfterPageLoad", Required = false, HelpText = "Number of milliseconds to wait after a page is loaded.")]
+        public int WaitAfterPageLoad { get; set; }
+
         private string GetUsage()
         {
             return HelpText.AutoBuild(this);

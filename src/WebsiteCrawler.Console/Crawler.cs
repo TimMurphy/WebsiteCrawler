@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Anotar.Custom;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
@@ -13,12 +14,14 @@ namespace WebsiteCrawler.Console
         private HashSet<string> _internalUrls;
         private IWebDriver _webDriver;
         private Uri _startUri;
+        private TimeSpan _waitAfterPageLoad;
 
-        public string Crawl(string startUrl)
+        public string Crawl(string startUrl, TimeSpan waitAfterPageLoad)
         {
             LogTo.Debug("Crawl(startUrl: {0})", startUrl);
 
             _startUri = new Uri(startUrl);
+            _waitAfterPageLoad = waitAfterPageLoad;
             _internalUrls = new HashSet<string>();
 
             LogTo.Information("Opening initial page '{0}'...", startUrl);
@@ -70,10 +73,11 @@ namespace WebsiteCrawler.Console
 
         private bool ExcludeUrl(string url)
         {
-            // todo: temporary hack. could be cause of croquet scores loop.
-            // return url.Contains("#");
-            // future use.
-            return false;
+            // hack
+            //
+            // Urls with # represent navigation to bookmark o page or navigation via a JavaScript call.
+            // Excluding these urls seemed to help with any issues while crawling www.croquetscores.com.
+            return url.Contains("#");
         }
 
         private IReadOnlyCollection<IWebElement> GetLinks()
@@ -85,8 +89,12 @@ namespace WebsiteCrawler.Console
 
         private void NavigateTo(string url)
         {
-            LogTo.Information("Navigating to '{0}'...", _webDriver.Url);
+            LogTo.Information("Navigating to '{0}'...", url);
             _webDriver.Navigate().GoToUrl(url);
+
+            // hack: IWebDriver waits for page to load but I found while crawling www.croquetscores.com adding 
+            // some wait time helped.
+            Thread.Sleep(_waitAfterPageLoad);
         }
 
         private bool IsNewUrl(string url)

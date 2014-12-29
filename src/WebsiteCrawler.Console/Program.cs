@@ -34,7 +34,7 @@ namespace WebsiteCrawler.Console
                 }
 
                 var crawler = new Crawler();
-                var result = crawler.Crawl(options.StartUrl);
+                var result = crawler.Crawl(options.StartUrl, TimeSpan.FromMilliseconds(options.WaitAfterPageLoad));
 
                 File.WriteAllText(options.ResultPath, result);
 
