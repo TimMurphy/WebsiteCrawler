@@ -12,6 +12,7 @@ namespace WebsiteCrawler.Library.Logging
 
         void Debug(string format, params object[] args);
         void Debug(Exception exception, string format, params object[] args);
+        void Information(string format);
         void Information(string format, params object[] args);
         void Information(Exception exception, string format, params object[] args);
         void Warning(string format, params object[] args);

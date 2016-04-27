@@ -37,6 +37,10 @@ namespace WebsiteCrawler.Library.Logging
         {
         }
 
+        public void Information(string format)
+        {
+        }
+
         public void Information(string format, params object[] args)
         {
         }

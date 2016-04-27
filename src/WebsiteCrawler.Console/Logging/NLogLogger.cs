@@ -4,7 +4,7 @@ using WebsiteCrawler.Library.Logging;
 
 namespace WebsiteCrawler.Console.Logging
 {
-    internal class NLogLogger : ILogger
+    internal class NLogLogger : Library.Logging.ILogger
     {
         private readonly Logger _logger;
 
@@ -48,6 +48,11 @@ namespace WebsiteCrawler.Console.Logging
             throw new NotImplementedException();
         }
 
+        public void Information(string format)
+        {
+            _logger.Info(format);
+        }
+
         public void Information(string format, params object[] args)
         {
             _logger.Info(format, args);
@@ -76,7 +81,7 @@ namespace WebsiteCrawler.Console.Logging
         public void Error(Exception exception, string format, params object[] args)
         {
             var message = string.Format(format, args);
-            _logger.Error(message, exception);
+            _logger.Error(exception, message);
         }
 
         public void Fatal(string format, params object[] args)
