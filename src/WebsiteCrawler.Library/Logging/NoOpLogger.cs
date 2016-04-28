@@ -57,6 +57,10 @@ namespace WebsiteCrawler.Library.Logging
         {
         }
 
+        public void Error(string format)
+        {
+        }
+
         public void Error(string format, params object[] args)
         {
         }

@@ -6,6 +6,7 @@ using Anotar.Custom;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using WebsiteCrawler.Console.Headless;
 
 namespace WebsiteCrawler.Console
 {
@@ -25,7 +26,7 @@ namespace WebsiteCrawler.Console
             _internalUrls = new HashSet<string>();
 
             LogTo.Information("Opening initial page '{0}'...", startUrl);
-            _webDriver = new FirefoxDriver();
+            _webDriver = new HeadlessWebDriver();
 
             try
             {
@@ -89,12 +90,15 @@ namespace WebsiteCrawler.Console
 
         private void NavigateTo(string url)
         {
-            LogTo.Information("Navigating to '{0}'...", url);
+            LogTo.Information($"Navigating to '{url}'...");
             _webDriver.Navigate().GoToUrl(url);
 
             // hack: IWebDriver waits for page to load but I found while crawling www.croquetscores.com adding 
             // some wait time helped.
-            Thread.Sleep(_waitAfterPageLoad);
+            if (_waitAfterPageLoad.TotalMilliseconds > 0)
+            {
+                Thread.Sleep(_waitAfterPageLoad);
+            }
         }
 
         private bool IsNewUrl(string url)

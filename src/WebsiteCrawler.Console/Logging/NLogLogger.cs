@@ -73,6 +73,11 @@ namespace WebsiteCrawler.Console.Logging
             throw new NotImplementedException();
         }
 
+        public void Error(string format)
+        {
+            _logger.Error(format);
+        }
+
         public void Error(string format, params object[] args)
         {
             throw new NotImplementedException();
