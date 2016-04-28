@@ -6,6 +6,7 @@ using Anotar.Custom;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.PhantomJS;
 
 namespace WebsiteCrawler.Console
 {
@@ -25,7 +26,7 @@ namespace WebsiteCrawler.Console
             _internalUrls = new HashSet<string>();
 
             LogTo.Information("Opening initial page '{0}'...", startUrl);
-            _webDriver = new FirefoxDriver();
+            _webDriver = new PhantomJSDriver();
 
             try
             {
